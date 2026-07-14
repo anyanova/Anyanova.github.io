@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Anya Nova Metcalfe</title>
+  <meta name="description" content="Get in touch with Anya Nova Metcalfe, stream ecologist and science communicator based in Flagstaff, Arizona.">
+  <meta name="author" content="Anya Nova Metcalfe">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="wrap">
+      <a class="brandmark" href="index.html">Anya&nbsp;Nova&nbsp;Metcalfe</a>
+      <nav class="navlinks">
+        <a href="index.html#about">About</a>
+        <a href="index.html#what">What I do</a>
+        <a href="index.html#work">Work</a>
+        <a href="index.html#next">What&#39;s next</a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </div>
+
+  <header class="pub-hero">
+    <div class="wrap">
+      <a class="back-link" href="index.html">&larr; Back home</a>
+      <h1>Contact</h1>
+      <p>Open to work in participatory science, science communication, and research operations. Email is the fastest way to reach me.</p>
+    </div>
+  </header>
+
+  <section class="contact-page">
+    <div class="wrap contact-grid">
+
+      <!-- ---------- direct email, easy to grab ---------- -->
+      <div class="contact-direct">
+        <p class="section-label mono">Email</p>
+        <div class="email-card">
+          <a class="email-big" href="mailto:anyanova.metcalfe@gmail.com">anyanova.metcalfe@gmail.com</a>
+          <div class="email-actions">
+            <button type="button" id="copyBtn" class="btn-copy mono">Copy address</button>
+            <a class="btn-mail mono" href="mailto:anyanova.metcalfe@gmail.com">Open in mail</a>
+          </div>
+        </div>
+
+        <dl class="detail-list">
+          <div><dt class="mono">Based in</dt><dd>Flagstaff, Arizona (Mountain Time)</dd></div>
+          <div><dt class="mono">Languages</dt><dd>English, Spanish, Russian</dd></div>
+          <div><dt class="mono">ORCID</dt><dd><a href="https://orcid.org/0000-0002-6286-4889">0000-0002-6286-4889</a></dd></div>
+          <div><dt class="mono">CV</dt><dd><a href="Anya_Metcalfe_CV.pdf" download>Download PDF</a></dd></div>
+        </dl>
+      </div>
+
+      <!-- ---------- form ---------- -->
+      <div class="contact-form-col">
+        <p class="section-label mono">Or send a note</p>
+
+        <!-- NOTE FOR ANYA: this form needs a free Formspree account to actually deliver mail.
+             1. Sign up at formspree.io with anyanova.metcalfe@gmail.com
+             2. Create a new form, copy the endpoint it gives you (looks like https://formspree.io/f/abcdwxyz)
+             3. Paste it into the action="" below, replacing YOUR_FORM_ID
+             Until you do that, the form will not send. The email above still works regardless. -->
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <label class="mono" for="name">Your name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+
+          <label class="mono" for="email">Your email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+
+          <label class="mono" for="subject">Subject</label>
+          <input type="text" id="subject" name="_subject" placeholder="What&#39;s this about?">
+
+          <label class="mono" for="message">Message</label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+
+          <button type="submit" class="btn-send">Send message</button>
+          <p class="form-note mono">Goes straight to my inbox. I usually reply within a couple of days.</p>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="contact-links">
+        <a href="index.html">Home</a>
+        <a href="publications.html">Publications</a>
+        <a href="Anya_Metcalfe_CV.pdf" download>CV (PDF)</a>
+      </div>
+      <p class="footer-note mono">Flagstaff, AZ &middot; Wilderness First Responder &middot; Swiftwater certified</p>
+    </div>
+  </footer>
+
+  <script>
+    var btn = document.getElementById('copyBtn');
+    btn.addEventListener('click', function () {
+      navigator.clipboard.writeText('anyanova.metcalfe@gmail.com').then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy address'; }, 1800);
+      }, function () {
+        btn.textContent = 'Press Ctrl+C';
+      });
+    });
+  </script>
+
+</body>
+</html>
