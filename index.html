@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -244,24 +244,37 @@
   <!-- ============ PHOTO THUMBS ============ -->
   <section class="thumbs">
     <div class="wrap">
-      <p class="thumbs-label mono">Joie de vivre</p>
+      <p class="thumbs-label mono">Joie de vivre &middot; <span class="thumbs-hint">click to enlarge</span></p>
       <div class="thumb-row">
+
         <figure class="thumb">
-          <img src="rowing.jpg" alt="Anya Metcalfe rowing a loaded cataraft through whitewater in a canyon, with a dog in a life jacket riding on the front tube.">
+          <button class="thumb-btn" type="button" aria-label="Enlarge photo: Reading water">
+            <img src="rowing.jpg" alt="Anya Metcalfe rowing a loaded cataraft through whitewater in a canyon, with a dog in a life jacket riding on the front tube.">
+          </button>
           <figcaption class="mono">Reading water</figcaption>
         </figure>
+
         <figure class="thumb">
-          <img src="biking.jpg" alt="Anya Metcalfe grinning on a mountain bike, spattered with red mud on a rainy trail.">
+          <button class="thumb-btn" type="button" aria-label="Enlarge photo: Rain optional">
+            <img src="biking.jpg" alt="Anya Metcalfe grinning on a mountain bike, spattered with red mud on a rainy trail.">
+          </button>
           <figcaption class="mono">Rain optional</figcaption>
         </figure>
+
         <figure class="thumb">
-          <img src="presentation.jpg" alt="Anya Metcalfe speaking at a microphone on a stage, in front of a projected slide.">
+          <button class="thumb-btn" type="button" aria-label="Enlarge photo: On a stage">
+            <img src="presentation.jpg" alt="Anya Metcalfe speaking at a microphone on a stage, in front of a projected slide.">
+          </button>
           <figcaption class="mono">On a stage</figcaption>
         </figure>
+
         <figure class="thumb">
-          <img src="laptop.jpg" alt="Anya Metcalfe with a coffee mug and a laptop, working while traveling at dawn.">
+          <button class="thumb-btn" type="button" aria-label="Enlarge photo: In transit">
+            <img src="laptop.jpg" alt="Anya Metcalfe with a coffee mug and a laptop, working while traveling at dawn.">
+          </button>
           <figcaption class="mono">In transit</figcaption>
         </figure>
+
       </div>
     </div>
   </section>
@@ -282,6 +295,62 @@
       <p class="footer-note mono">Flagstaff, AZ &middot; Open to remote</p>
     </div>
   </footer>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo">&times;</button>
+    <figure class="lightbox-inner">
+      <img id="lightboxImg" src="" alt="">
+      <figcaption id="lightboxCap" class="mono"></figcaption>
+    </figure>
+  </div>
+
+  <script>
+    (function () {
+      var box      = document.getElementById('lightbox');
+      var boxImg   = document.getElementById('lightboxImg');
+      var boxCap   = document.getElementById('lightboxCap');
+      var closeBtn = document.getElementById('lightboxClose');
+      var lastFocus = null;
+
+      function openBox(btn) {
+        var img = btn.querySelector('img');
+        var cap = btn.parentElement.querySelector('figcaption');
+        lastFocus = btn;
+        boxImg.src = img.getAttribute('src');
+        boxImg.alt = img.getAttribute('alt');
+        boxCap.textContent = cap ? cap.textContent : '';
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeBox() {
+        box.hidden = true;
+        boxImg.setAttribute('src', '');
+        document.body.style.overflow = '';
+        if (lastFocus) { lastFocus.focus(); }
+      }
+
+      var btns = document.querySelectorAll('.thumb-btn');
+      for (var i = 0; i < btns.length; i++) {
+        (function (btn) {
+          btn.addEventListener('click', function () { openBox(btn); });
+        })(btns[i]);
+      }
+
+      closeBtn.addEventListener('click', closeBox);
+
+      // click the dark backdrop (not the photo itself) to close
+      box.addEventListener('click', function (e) {
+        if (e.target === box) { closeBox(); }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !box.hidden) { closeBox(); }
+      });
+    })();
+  </script>
 
 </body>
 </html>
